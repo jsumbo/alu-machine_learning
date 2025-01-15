@@ -15,7 +15,7 @@ class NeuralNetwork:
 
         Args:
             nx (int): size of the input layer
-            nodes (_type_): _description_
+            nodes (int): number of nodes in the hidden layer
         """
         if not isinstance(nx, int):
             raise TypeError('nx must be an integer')
@@ -83,8 +83,8 @@ class NeuralNetwork:
         """ Calculates the cost of the model using logistic regression
 
         Args:
-            Y (_type_): _description_
-            A (_type_): _description_
+            Y (numpy.array): True labels
+            A (numpy.array): Activated output
         """
         loss = -(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
         cost = np.mean(loss)
@@ -94,8 +94,8 @@ class NeuralNetwork:
         """ Evaluates the neural network’s predictions
 
         Args:
-            X (_type_): _description_
-            Y (_type_): _description_
+            X (numpy.array): Input data
+            Y (numpy.array): True labels
         """
         self.forward_prop(X)
         return np.where(self.__A2 >= 0.5, 1, 0), self.cost(Y, self.__A2)
@@ -104,13 +104,12 @@ class NeuralNetwork:
         """ Calculates one pass of gradient descent on the neural network
 
         Args:
-            X (_type_): _description_
-            Y (_type_): _description_
-            A1 (_type_): _description_
-            A2 (_type_): _description_
-            alpha (float, optional): _description_. Defaults to 0.05.
+            X (numpy.array): Input data
+            Y (numpy.array): True labels
+            A1 (numpy.array): Activated output of hidden layer
+            A2 (numpy.array): Activated output of output layer
+            alpha (float, optional): Learning rate. Defaults to 0.05.
         """
-        
         m = Y.shape[1]
         dz2 = A2 - Y
         dw2 = np.matmul(A1, dz2.T) / m
@@ -128,10 +127,10 @@ class NeuralNetwork:
         """ Trains the neural network
 
         Args:
-            X (_type_): _description_
-            Y (_type_): _description_
-            iterations (int, optional): _description_. Defaults to 5000.
-            alpha (float, optional): _description_. Defaults to 0.05.
+            X (numpy.array): Input data
+            Y (numpy.array): True labels
+            iterations (int, optional): Number of iterations. Defaults to 5000.
+            alpha (float, optional): Learning rate. Defaults to 0.05.
         """
         if not isinstance(iterations, int):
             raise TypeError('iterations must be an integer')
