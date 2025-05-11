@@ -3,7 +3,6 @@
 Defines class NST that performs tasks for neural style transfer
 """
 
-
 import numpy as np
 import tensorflow as tf
 
@@ -157,3 +156,4 @@ class NST:
 
         model = tf.keras.models.Model(vgg.input, outputs)
         self.model = model
+        
