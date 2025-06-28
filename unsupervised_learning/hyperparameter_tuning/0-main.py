@@ -16,6 +16,6 @@ if __name__ == '__main__':
     gp = GP(X_init, Y_init, l=0.6, sigma_f=2)
     # Set numpy print options for consistent output
     np.set_printoptions(precision=8, suppress=True)
-    print(gp.X)
-    print(gp.Y)
+    print(gp.X.flatten())
+    print(gp.Y.flatten())
     print(gp.K)
